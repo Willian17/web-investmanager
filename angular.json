@@ -94,7 +94,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeng/resources/themes/lara-light-teal/theme.css",
+              "src/app/styles/theme.scss",
               "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": []
