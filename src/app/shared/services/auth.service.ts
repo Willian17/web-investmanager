@@ -15,4 +15,10 @@ export class AuthService {
       this.http.post(`${this.baseUrl}/auth/signin`, data)
     );
   }
+
+  async signup(data: { email: string; password: string; name: string}) {
+    return await lastValueFrom(
+      this.http.post(`${this.baseUrl}/auth/signup`, data)
+    );
+  }
 }
