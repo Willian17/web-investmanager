@@ -9,21 +9,18 @@
       [formGroup]="signinForm"
       (submit)="onSubmitSignin()"
     >
-      <div class="flex flex-col mb-3">
-        <label htmlFor="email" class="mb-1">Email</label>
-        <input pInputText id="email" type="email" formControlName="email" />
-        <app-input-message [form]="signinForm" controlName="email" />
-      </div>
-      <div class="flex flex-col mb-3">
-        <label htmlFor="password">Senha</label>
-        <input
-          pInputText
-          id="password"
-          type="password"
-          formControlName="password"
-        />
-        <app-input-message [form]="signinForm" controlName="password" />
-      </div>
+      <app-input-text
+        [form]="signinForm"
+        label="Email"
+        type="email"
+        controlName="email"
+      />
+      <app-input-text
+        [form]="signinForm"
+        label="Senha"
+        type="password"
+        controlName="password"
+      />
       <p-button
         type="submit"
         label="Login"
@@ -32,7 +29,7 @@
       ></p-button>
     </form>
     <div class="w-full flex justify-center">
-      <a href="#" class="text-primary">Crie sua conta</a>
+      <a [routerLink]="['/signup']" class="text-primary">Crie sua conta</a>
     </div>
   </div>
 </div>

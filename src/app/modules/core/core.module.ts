@@ -5,6 +5,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputMaskModule } from 'primeng/inputmask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [],
   imports: [
@@ -13,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     InputMaskModule,
     ToastModule,
+    RouterModule,
   ],
   exports: [
     ButtonModule,
@@ -21,6 +23,7 @@ import { ToastModule } from 'primeng/toast';
     ReactiveFormsModule,
     FormsModule,
     ToastModule,
+    RouterModule,
   ],
 })
 export class CoreModule {}

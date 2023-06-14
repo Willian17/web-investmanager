@@ -1,0 +1,10 @@
+<div class="flex flex-col mb-3" [formGroup]="form">
+  <label [htmlFor]="controlName" class="mb-1">{{ label }}</label>
+  <input
+    pInputText
+    [id]="controlName"
+    [type]="type"
+    [formControlName]="controlName"
+  />
+  <app-input-message [form]="form" [controlName]="controlName" />
+</div>
