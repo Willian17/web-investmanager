@@ -3,16 +3,26 @@
     <h1 class="text-4xl mb-4 text-center tracking-wider text-primary">
       <span class="font-bold">Invest</span>Manager
     </h1>
-    <form class="mb-5">
+    <form class="mb-5" [formGroup]="signinForm" (submit)="onSubmitSignin()">
       <div class="flex flex-col gap-2 mb-3">
         <label htmlFor="email">Email</label>
-        <input pInputText id="email" type="email" />
+        <input pInputText id="email" type="email" formControlName="email" />
       </div>
       <div class="flex flex-col gap-2 mb-3">
         <label htmlFor="password">Password</label>
-        <input pInputText id="password" type="password" />
+        <input
+          pInputText
+          id="password"
+          type="password"
+          formControlName="password"
+        />
       </div>
-      <p-button type="submit" label="Login" class="mt-3 w-full"></p-button>
+      <p-button
+        type="submit"
+        label="Login"
+        class="mt-3 w-full"
+        [disabled]="signinForm.invalid"
+      ></p-button>
     </form>
     <div class="w-full flex justify-center">
       <a href="#" class="text-primary">Crie sua conta</a>
