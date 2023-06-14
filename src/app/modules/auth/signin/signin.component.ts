@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-signin',
@@ -12,7 +13,8 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -23,7 +25,9 @@ export class SigninComponent implements OnInit {
   }
 
   async onSubmitSignin() {
-    const response = await this.authService.signin(this.signinForm.value);
-    console.log(response);
+    const response = (await this.authService.signin(this.signinForm.value)) as {
+      access_token: string;
+    };
+    this.userService.setToken(response.access_token);
   }
 }
