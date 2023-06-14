@@ -9,11 +9,10 @@ module.exports = {
         teal: {
           800: '#299D91',
         },
+        primary: '#299D91',
       }
     },
-    colors: {
-      primary: '#299D91',
-    }
+
   },
   plugins: [],
 }

@@ -3,19 +3,26 @@
     <h1 class="text-4xl mb-4 text-center tracking-wider text-primary">
       <span class="font-bold">Invest</span>Manager
     </h1>
-    <form class="mb-5" [formGroup]="signinForm" (submit)="onSubmitSignin()">
-      <div class="flex flex-col gap-2 mb-3">
-        <label htmlFor="email">Email</label>
+    <form
+      *ngIf="signinForm"
+      class="mb-5"
+      [formGroup]="signinForm"
+      (submit)="onSubmitSignin()"
+    >
+      <div class="flex flex-col mb-3">
+        <label htmlFor="email" class="mb-1">Email</label>
         <input pInputText id="email" type="email" formControlName="email" />
+        <app-input-message [form]="signinForm" controlName="email" />
       </div>
-      <div class="flex flex-col gap-2 mb-3">
-        <label htmlFor="password">Password</label>
+      <div class="flex flex-col mb-3">
+        <label htmlFor="password">Senha</label>
         <input
           pInputText
           id="password"
           type="password"
           formControlName="password"
         />
+        <app-input-message [form]="signinForm" controlName="password" />
       </div>
       <p-button
         type="submit"

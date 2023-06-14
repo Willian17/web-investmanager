@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorHttpInterceptor } from './shared/interceptors/error-http.interceptor';
 import { MessageService } from 'primeng/api';
 import { CoreModule } from './modules/core/core.module';
+import { ComponentsModule } from './shared/components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
