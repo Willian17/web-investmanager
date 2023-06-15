@@ -6,8 +6,10 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { RouterModule } from '@angular/router';
+import { MenuComponent } from './menu/menu.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
-  declarations: [],
+  declarations: [MenuComponent],
   imports: [
     CommonModule,
     ButtonModule,
@@ -15,6 +17,7 @@ import { RouterModule } from '@angular/router';
     InputMaskModule,
     ToastModule,
     RouterModule,
+    FontAwesomeModule,
   ],
   exports: [
     ButtonModule,
@@ -24,6 +27,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ToastModule,
     RouterModule,
+    MenuComponent,
+    FontAwesomeModule,
   ],
 })
 export class CoreModule {}

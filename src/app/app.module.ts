@@ -9,6 +9,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorHttpInterceptor } from './shared/interceptors/error-http.interceptor';
 import { MessageService } from 'primeng/api';
 import { CoreModule } from './modules/core/core.module';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +24,7 @@ import { CoreModule } from './modules/core/core.module';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
+    FontAwesomeModule,
   ],
   providers: [
     MessageService,
@@ -29,4 +36,8 @@ import { CoreModule } from './modules/core/core.module';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, far);
+  }
+}

@@ -1,0 +1,80 @@
+<div *ngIf="!hideMenuUrls.includes(currentUrl)">
+  <div class="hidden lg:block navbar-menu relative z-50">
+    <div
+      class="navbar-backdrop fixed lg:hidden inset-0 bg-gray-800 opacity-10"
+    ></div>
+    <nav
+      class="fixed top-0 left-0 bottom-0 flex flex-col w-3/4 lg:w-80 sm:max-w-xs pt-12 pb-8 bg-gray-800 overflow-y-auto"
+    >
+      <div class="flex w-full items-center px-6 pb-6 mb-6">
+        <a [routerLink]="['/']">
+          <h1
+            class="text-3xl leading-8 text-center tracking-wider text-white font-medium"
+          >
+            <span class="font-bold">Invest</span>Manager
+          </h1>
+        </a>
+      </div>
+      <div class="px-4 pb-6">
+        <h3 class="mb-2 text-xs uppercase text-gray-500 font-medium">
+          Principal
+        </h3>
+        <ul class="mb-8 text-base">
+          <li *ngFor="let menuItem of menuItemsPrincipal">
+            <a
+              class="flex items-center pl-3 py-3 pr-4 text-gray-50 rounded mb-4"
+              [routerLink]="[menuItem.url]"
+              [ngClass]="[
+                menuItem.url === currentUrl
+                  ? 'bg-primary font-semibold'
+                  : 'hover:bg-gray-900'
+              ]"
+            >
+              <span class="inline-block mr-3">
+                <fa-icon [icon]="menuItem.icon" size="lg"> </fa-icon>
+              </span>
+              <span>{{ menuItem.label }}</span>
+            </a>
+          </li>
+        </ul>
+        <h3 class="mb-2 text-xs uppercase text-gray-500 font-medium">
+          Configurações
+        </h3>
+        <ul class="text-base">
+          <li *ngFor="let menuItem of menuItemsConfig">
+            <a
+              class="flex items-center pl-3 py-3 pr-4 text-gray-50 hover:bg-gray-900 rounded"
+              [routerLink]="[menuItem.url]"
+            >
+              <span class="inline-block mr-3">
+                <fa-icon [icon]="menuItem.icon" size="lg"> </fa-icon>
+              </span>
+              <span>{{ menuItem.label }}</span>
+            </a>
+          </li>
+        </ul>
+        <div class="mt-[30%] mb-10">
+          <a
+            class="flex items-center pl-3 py-3 pr-2 text-gray-50 bg-gray-900 rounded cursor-pointer"
+            (click)="handleLogout()"
+          >
+            <span class="inline-block mr-4">
+              <fa-icon [icon]="['fas', 'arrow-right-to-bracket']" size="lg">
+              </fa-icon>
+            </span>
+            <span>Sair</span>
+          </a>
+        </div>
+        <div
+          class="pt-8 flex items-center pl-3 py-3 pr-2 text-gray-50 border-t border-gray-700"
+        >
+          <span class="inline-block mr-4">
+            <fa-icon [icon]="['fas', 'user-circle']" size="xl"> </fa-icon>
+          </span>
+          <span class="font-bold">{{ username }}</span>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="mx-auto lg:ml-80"></div>
+</div>
