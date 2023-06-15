@@ -16,7 +16,7 @@ export class AuthGuard {
     state: RouterStateSnapshot
   ): boolean | Promise<boolean> | Observable<boolean> {
     if (!this.userService.isLogged()) {
-      this.router.navigate([''], {
+      this.router.navigate(['signin'], {
         queryParams: {
           fromUrl: state.url,
         },

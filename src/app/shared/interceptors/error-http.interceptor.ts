@@ -20,7 +20,8 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        const errorMsg = error.error.message;
+        const errorMsg =
+          error.error.message || 'Ocorreu um erro ao fazer a solicitação!';
         this.messageService.add({
           severity: 'error',
           summary: 'Error',

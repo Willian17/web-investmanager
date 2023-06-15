@@ -2,12 +2,19 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SigninComponent } from './modules/auth/signin/signin.component';
 import { SignupComponent } from './modules/auth/signup/signup.component';
+import { ActivesComponent } from './modules/actives/actives.component';
+import { AuthGuard } from './modules/auth/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'signin',
+    redirectTo: 'actives',
+  },
+  {
+    path: 'actives',
+    component: ActivesComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'signin',
