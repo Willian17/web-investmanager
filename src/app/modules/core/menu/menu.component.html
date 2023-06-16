@@ -43,8 +43,13 @@
         <ul class="text-base">
           <li *ngFor="let menuItem of menuItemsConfig">
             <a
-              class="flex items-center pl-3 py-3 pr-4 text-gray-50 hover:bg-gray-900 rounded"
+              class="flex items-center pl-3 py-3 pr-4 text-gray-50 rounded"
               [routerLink]="[menuItem.url]"
+              [ngClass]="[
+                menuItem.url === currentUrl
+                  ? 'bg-primary font-semibold'
+                  : 'hover:bg-gray-900'
+              ]"
             >
               <span class="inline-block mr-3">
                 <fa-icon [icon]="menuItem.icon" size="lg"> </fa-icon>

@@ -4,6 +4,7 @@ import { SigninComponent } from './modules/auth/signin/signin.component';
 import { SignupComponent } from './modules/auth/signup/signup.component';
 import { ActivesComponent } from './modules/actives/actives.component';
 import { AuthGuard } from './modules/auth/auth.guard';
+import { QuestionsComponent } from './modules/questions/questions.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,11 @@ const routes: Routes = [
   {
     path: 'actives',
     component: ActivesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'questions',
+    component: QuestionsComponent,
     canActivate: [AuthGuard],
   },
   {

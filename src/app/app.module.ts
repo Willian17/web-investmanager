@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './modules/auth/auth.module';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ErrorHttpInterceptor } from './shared/interceptors/error-http.interceptor';
+import { QuestionsModule } from './modules/questions/questions.module';
+import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { CoreModule } from './modules/core/core.module';
 import {
@@ -25,15 +25,10 @@ import { far } from '@fortawesome/free-regular-svg-icons';
     HttpClientModule,
     CoreModule,
     FontAwesomeModule,
+    QuestionsModule,
+    AuthModule,
   ],
-  providers: [
-    MessageService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorHttpInterceptor,
-      multi: true,
-    },
-  ],
+  providers: [MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {

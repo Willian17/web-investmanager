@@ -49,7 +49,7 @@ export class MenuComponent implements OnInit {
   constructor(private router: Router, private userService: UserService) {
     this.router.events.subscribe((event) => {
       if (event.constructor.name === 'NavigationEnd') {
-        this.currentUrl = (event as any).url;
+        this.currentUrl = this.router.url;
       }
     });
   }

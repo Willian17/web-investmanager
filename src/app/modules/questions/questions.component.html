@@ -1,0 +1,35 @@
+<div>
+  <h1 class="text-gray-500 text-2xl mb-3">Critérios</h1>
+  <p-card>
+    <p-table [value]="questions">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Tipo</th>
+          <th>Quantidade</th>
+          <th class="w-3">Ação</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-question let-i="rowIndex">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>
+            <p-tag
+              [value]="getLabelEnum(question.category)"
+              [severity]="getSeverityTagCategory(i)"
+            ></p-tag>
+          </td>
+          <td>
+            {{ question.quantity }}
+            {{ question.quantity > 1 ? "Perguntas" : "Pergunta" }}
+          </td>
+          <td>
+            <p-button styleClass="p-button-sm">
+              <fa-icon [icon]="['fas', 'edit']" size="lg"></fa-icon>
+            </p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

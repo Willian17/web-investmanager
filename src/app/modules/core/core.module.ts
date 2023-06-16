@@ -8,6 +8,13 @@ import { ToastModule } from 'primeng/toast';
 import { RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ResponseInterceptor } from 'src/app/shared/interceptors/response.interceptor';
+import { RequestInterceptor } from 'src/app/shared/interceptors/request.interceptor';
+import { CardModule } from 'primeng/card';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+
 @NgModule({
   declarations: [MenuComponent],
   imports: [
@@ -18,6 +25,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ToastModule,
     RouterModule,
     FontAwesomeModule,
+    CardModule,
+    TagModule,
   ],
   exports: [
     ButtonModule,
@@ -29,6 +38,21 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     RouterModule,
     MenuComponent,
     FontAwesomeModule,
+    CardModule,
+    TableModule,
+    TagModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ResponseInterceptor,
+      multi: true,
+    },
   ],
 })
 export class CoreModule {}
