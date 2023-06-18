@@ -25,7 +25,7 @@
               class="flex items-center pl-3 py-3 pr-4 text-gray-50 rounded mb-4"
               [routerLink]="[menuItem.url]"
               [ngClass]="[
-                menuItem.url === currentUrl
+                currentUrl.startsWith(menuItem.url)
                   ? 'bg-primary font-semibold'
                   : 'hover:bg-gray-900'
               ]"
@@ -46,7 +46,7 @@
               class="flex items-center pl-3 py-3 pr-4 text-gray-50 rounded"
               [routerLink]="[menuItem.url]"
               [ngClass]="[
-                menuItem.url === currentUrl
+                currentUrl.startsWith(menuItem.url)
                   ? 'bg-primary font-semibold'
                   : 'hover:bg-gray-900'
               ]"
