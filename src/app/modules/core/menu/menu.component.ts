@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
   currentUrl = '';
 
   hideMenuUrls = ['/signin', '/signup'];
+  showMenu = true;
 
   username = '';
 
@@ -50,6 +51,11 @@ export class MenuComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event.constructor.name === 'NavigationEnd') {
         this.currentUrl = this.router.url;
+        if (this.hideMenuUrls.some((url) => this.router.url.startsWith(url))) {
+          this.showMenu = false;
+        } else {
+          this.showMenu = true;
+        }
       }
     });
   }

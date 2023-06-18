@@ -3,11 +3,13 @@
     Critérios / {{ getLabelEnum(category) }}
   </h1>
   <p-card>
-    <div class="max-w-min">
-      <p-button>
-        <fa-icon [icon]="['fas', 'plus']" size="lg"></fa-icon>
-        Criar
-      </p-button>
+    <div class="flex justify-end">
+      <div class="max-w-min">
+        <p-button>
+          <fa-icon [icon]="['fas', 'plus']" size="lg" class="mr-2"></fa-icon>
+          Adicionar
+        </p-button>
+      </div>
     </div>
 
     <p-table [value]="questions">
