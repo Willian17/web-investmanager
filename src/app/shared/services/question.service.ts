@@ -17,4 +17,28 @@ export class QuestionService {
       this.http.get(`${this.baseUrl}/questions`)
     )) as IQuestion[];
   }
+
+  async getQuestionsByCategory(category: string): Promise<IQuestion[]> {
+    return (await lastValueFrom(
+      this.http.get(`${this.baseUrl}/questions/category/${category}`)
+    )) as IQuestion[];
+  }
+
+  async create(question: IQuestion): Promise<IQuestion> {
+    return (await lastValueFrom(
+      this.http.post(`${this.baseUrl}/questions`, question)
+    )) as IQuestion;
+  }
+
+  async update(question: IQuestion): Promise<IQuestion> {
+    return (await lastValueFrom(
+      this.http.put(`${this.baseUrl}/questions`, question)
+    )) as IQuestion;
+  }
+
+  async delete(id: number): Promise<IQuestion> {
+    return (await lastValueFrom(
+      this.http.delete(`${this.baseUrl}/questions/${id}`)
+    )) as IQuestion;
+  }
 }

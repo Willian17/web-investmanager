@@ -24,7 +24,10 @@
             {{ question.quantity > 1 ? "Perguntas" : "Pergunta" }}
           </td>
           <td>
-            <p-button styleClass="p-button-sm">
+            <p-button
+              styleClass="p-button-sm"
+              [routerLink]="['/questions', question.category]"
+            >
               <fa-icon [icon]="['fas', 'edit']" size="lg"></fa-icon>
             </p-button>
           </td>

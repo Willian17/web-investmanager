@@ -1,0 +1,43 @@
+<div>
+  <h1 class="text-gray-500 text-2xl mb-3">
+    Critérios / {{ getLabelEnum(category) }}
+  </h1>
+  <p-card>
+    <div class="max-w-min">
+      <p-button>
+        <fa-icon [icon]="['fas', 'plus']" size="lg"></fa-icon>
+        Criar
+      </p-button>
+    </div>
+
+    <p-table [value]="questions">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="w-3">Id</th>
+          <th>Pergunta</th>
+          <th>Critério</th>
+          <th class="w-3">Ação</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-question let-i="rowIndex">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>
+            {{ question.question }}
+          </td>
+          <td>
+            {{ question.criterion }}
+          </td>
+          <td class="flex gap-3">
+            <p-button styleClass="p-button-sm">
+              <fa-icon [icon]="['fas', 'edit']" size="lg"></fa-icon>
+            </p-button>
+            <p-button styleClass="p-button-sm p-button-danger">
+              <fa-icon [icon]="['fas', 'trash']" size="lg"></fa-icon>
+            </p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
