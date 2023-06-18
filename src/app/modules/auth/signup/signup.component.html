@@ -3,25 +3,25 @@
     <h1 class="text-4xl mb-4 text-center tracking-wider text-primary">
       <span class="font-bold">Invest</span>Manager
     </h1>
-    <form class="mb-5" [formGroup]="signupForm" (submit)="onSubmitSignin()">
-      <div class="flex flex-col gap-2 mb-3">
-        <label htmlFor="name">Nome</label>
-        <input pInputText id="name" type="text" formControlName="name" placeholder="seu nome"/>
-      </div>
-      <div class="flex flex-col gap-2 mb-3">
-        <label htmlFor="email">Email</label>
-        <input pInputText id="email" type="email" formControlName="email" placeholder="email@example.com"/>
-      </div>
-      <div class="flex flex-col gap-2 mb-3">
-        <label htmlFor="password">Password</label>
-        <input
-          pInputText
-          id="password"
-          type="password"
-          formControlName="password"
-          placeholder="********"
-        />
-      </div>
+    <form class="mb-5" [formGroup]="signupForm" (submit)="onSubmitSignup()">
+      <app-input-text
+        [form]="signupForm"
+        label="Nome"
+        type="text"
+        controlName="name"
+      />
+      <app-input-text
+        [form]="signupForm"
+        label="Email"
+        type="email"
+        controlName="email"
+      />
+      <app-input-text
+        [form]="signupForm"
+        label="Senha"
+        type="password"
+        controlName="password"
+      />
       <p-button
         type="submit"
         label="Cadastrar"
@@ -30,7 +30,7 @@
       ></p-button>
     </form>
     <div class="w-full flex justify-center">
-      <p class="">Já tem uma conta? <a href="#" class="text-primary">Faça o login</a></p>
+      <p class="">Já tem uma conta? <a [routerLink]="['/signin']" class="text-primary">Faça o login</a></p>
     </div>
   </div>
 </div>

@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,7 +14,9 @@ export class SignupComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private router: Router,
+    private authService: AuthService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -23,8 +27,13 @@ export class SignupComponent implements OnInit{
     });
   }
 
-  async onSubmitSignin() {
+  async onSubmitSignup() {
     const response = await this.authService.signup(this.signupForm.value);
-    console.log(response);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Usuario cadastrado com sucesso',
+    });
+    this.router.navigate(['/signin']);
   }
 }
