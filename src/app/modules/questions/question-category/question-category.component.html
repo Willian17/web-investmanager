@@ -1,11 +1,15 @@
 <div>
   <h1 class="text-gray-500 text-2xl mb-3">
-    Critérios / {{ getLabelEnum(category) }}
+    <span class="underline cursor-pointer" (click)="handleBack()"
+      >Critérios</span
+    >
+    /
+    {{ getLabelEnum(category) }}
   </h1>
   <p-card>
     <div class="flex justify-end">
       <div class="max-w-min">
-        <p-button>
+        <p-button (onClick)="handleShowDialogForm()">
           <fa-icon [icon]="['fas', 'plus']" size="lg" class="mr-2"></fa-icon>
           Adicionar
         </p-button>
@@ -31,10 +35,16 @@
             {{ question.criterion }}
           </td>
           <td class="flex gap-3">
-            <p-button styleClass="p-button-sm">
+            <p-button
+              styleClass="p-button-sm"
+              (click)="handleShowDialogForm(question)"
+            >
               <fa-icon [icon]="['fas', 'edit']" size="lg"></fa-icon>
             </p-button>
-            <p-button styleClass="p-button-sm p-button-danger">
+            <p-button
+              styleClass="p-button-sm p-button-danger"
+              (click)="handleDelete(question, $event)"
+            >
               <fa-icon [icon]="['fas', 'trash']" size="lg"></fa-icon>
             </p-button>
           </td>
@@ -43,3 +53,34 @@
     </p-table>
   </p-card>
 </div>
+<p-dialog
+  [header]="questionEdit ? 'Editar critério' : 'Criar critério'"
+  [(visible)]="showDialogForm"
+  [style]="{ width: '50vw', marginLeft: '4rem' }"
+  [modal]="true"
+  [draggable]="false"
+>
+  <form
+    *ngIf="questionForm"
+    [formGroup]="questionForm"
+    (submit)="handleSubmit()"
+  >
+    <app-input-text-area
+      [form]="questionForm"
+      label="Pergunta?"
+      controlName="question"
+    />
+    <app-input-text
+      [form]="questionForm"
+      label="Critério"
+      type="text"
+      controlName="criterion"
+    />
+    <p-button
+      type="submit"
+      label="Salvar"
+      class="mt-3 w-full"
+      [disabled]="questionForm.invalid"
+    ></p-button>
+  </form>
+</p-dialog>

@@ -14,6 +14,10 @@ import { RequestInterceptor } from 'src/app/shared/interceptors/request.intercep
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [MenuComponent],
@@ -27,6 +31,10 @@ import { TagModule } from 'primeng/tag';
     FontAwesomeModule,
     CardModule,
     TagModule,
+    DialogModule,
+    InputTextareaModule,
+    ConfirmPopupModule,
+    ConfirmDialogModule,
   ],
   exports: [
     ButtonModule,
@@ -41,6 +49,10 @@ import { TagModule } from 'primeng/tag';
     CardModule,
     TableModule,
     TagModule,
+    DialogModule,
+    InputTextareaModule,
+    ConfirmPopupModule,
+    ConfirmDialogModule,
   ],
   providers: [
     {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { CategoryQuestionEnum } from 'src/app/shared/Enuns/CategoryQuestionEnum';
 import { IQuestion } from 'src/app/shared/interfaces/IQuestion';
 import { QuestionService } from 'src/app/shared/services/question.service';
@@ -12,10 +14,16 @@ import { QuestionService } from 'src/app/shared/services/question.service';
 export class QuestionCategoryComponent implements OnInit {
   category: any = 'AN';
   questions: IQuestion[] = [];
+  showDialogForm = false;
+  questionForm: FormGroup = new FormGroup({});
+  questionEdit: IQuestion = undefined as any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private formBuilder: FormBuilder,
+    private messageService: MessageService,
+    private router: Router
   ) {
     this.activatedRoute.params.subscribe((params) => {
       this.category = params['category'];
@@ -24,6 +32,14 @@ export class QuestionCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getQuestions();
+    this.questionForm = this.formBuilder.group({
+      question: ['', [Validators.required]],
+      criterion: ['', [Validators.required]],
+    });
+  }
+
+  handleBack() {
+    this.router.navigate(['/questions']);
   }
 
   getQuestions() {
@@ -56,6 +72,65 @@ export class QuestionCategoryComponent implements OnInit {
         return 'warning';
       default:
         return 'danger';
+    }
+  }
+
+  handleShowDialogForm(question?: IQuestion) {
+    this.showDialogForm = true;
+    this.questionEdit = question as IQuestion;
+    this.setValuesForm(question);
+  }
+
+  setValuesForm(question?: IQuestion) {
+    this.questionForm.controls['question'].setValue(question?.question || '');
+    this.questionForm.controls['criterion'].setValue(question?.criterion || '');
+  }
+
+  async handleSubmit() {
+    if (this.questionEdit) {
+      await this.questionService.update(
+        {
+          ...this.questionForm.value,
+          category: this.category,
+        },
+        this.questionEdit.id as string
+      );
+    } else {
+      await this.questionService.create({
+        ...this.questionForm.value,
+        category: this.category,
+      });
+    }
+
+    this.getQuestions();
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Sucesso',
+      detail: `Questão ${
+        this.questionEdit ? 'editada' : 'cadastrada'
+      } com sucesso`,
+    });
+    this.resetValues();
+  }
+
+  resetValues() {
+    this.showDialogForm = false;
+    this.questionForm.reset();
+    this.questionEdit = undefined as any;
+  }
+
+  async handleDelete(question: IQuestion, event: Event) {
+    const accept = await this.questionService.delete(
+      question.id as string,
+      event
+    );
+    if (accept) {
+      this.getQuestions();
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Sucesso',
+        detail: `Questão deletada com sucesso`,
+      });
     }
   }
 }

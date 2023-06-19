@@ -1,9 +1,9 @@
 import { CategoryQuestionEnum } from '../Enuns/CategoryQuestionEnum';
 
 export interface IQuestion {
-  id?: number;
+  id?: string;
   question: string;
-  criteorion: string;
+  criterion: string;
   quantity?: number;
   category: CategoryQuestionEnum;
 }

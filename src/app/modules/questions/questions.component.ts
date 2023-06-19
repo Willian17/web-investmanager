@@ -18,7 +18,7 @@ export class QuestionsComponent implements OnInit {
   }
 
   getQuestions() {
-    this.questionService.getQuestions().then((questions) => {
+    this.questionService.get().then((questions) => {
       this.questions = questions;
     });
   }
