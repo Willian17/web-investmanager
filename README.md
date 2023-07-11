@@ -97,7 +97,7 @@ Contribuições são sempre bem-vindas!
 
 ## 📝 Licença <a name="licenca"></a>
 
-Esse projeto está sob licença [MIT](LICENSE.md).
+Esse projeto está sob licença [MIT](LICENSE).
 
 ## :man_astronaut: Mostre seu apoio 
 
