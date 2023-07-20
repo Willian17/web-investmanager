@@ -1,1 +1,59 @@
-<p>actives works!</p>
+<div>
+  <h1 class="text-gray-500 text-2xl mb-3">Meus ativos</h1>
+  <p-card>
+    <div class="flex justify-end">
+      <div class="max-w-min">
+        <p-button [routerLink]="['/actives/active']">
+          <fa-icon [icon]="['fas', 'plus']" size="lg" class="mr-2"></fa-icon>
+          Adicionar
+        </p-button>
+      </div>
+    </div>
+    <p-table [value]="actives">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Tipo</th>
+          <th>Nome</th>
+          <th>Alocado</th>
+          <th>Recomendado</th>
+          <th>Atual</th>
+          <th class="w-3">Ações</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-active let-i="rowIndex">
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>
+            <p-tag
+              [value]="getLabelEnum(active.category)"
+              [severity]="getSeverityTagCategory(active.category)"
+            ></p-tag>
+          </td>
+          <td>
+            {{ active.name }}
+          </td>
+          <td>
+            {{ active.currentValue | currency : "BRL" }}
+          </td>
+          <td>{{ active.recommend | number : "1.2-2" }}%</td>
+          <td>{{ active.percentage | number : "1.2-2" }}%</td>
+          <td class="flex gap-3">
+            <p-button
+              styleClass="p-button-sm"
+              [routerLink]="['/actives/active', active.id]"
+            >
+              <fa-icon [icon]="['fas', 'edit']" size="lg"></fa-icon>
+            </p-button>
+            <p-button
+              styleClass="p-button-sm p-button-danger"
+              (click)="handleDelete(active, $event)"
+            >
+              <fa-icon [icon]="['fas', 'trash']" size="lg"></fa-icon>
+            </p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
