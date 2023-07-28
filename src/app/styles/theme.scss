@@ -277,6 +277,10 @@
   --primary-900: #03463c;
 }
 
+.p-autocomplete, .p-autocomplete-input{
+  width: 100%;
+}
+
 .p-autocomplete .p-autocomplete-loader {
   right: 0.75rem;
 }
@@ -842,6 +846,7 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
   border: 1px solid #d4d4d8;
   transition: none;
   border-radius: 0.375rem;
+  width: 100%;
 }
 .p-dropdown:not(.p-disabled):hover {
   border-color: #d4d4d8;
@@ -1135,6 +1140,9 @@ p-inputmask.p-inputmask-clearable .p-inputtext {
 p-inputmask.p-inputmask-clearable .p-inputmask-clear-icon {
   color: #71717A;
   right: 0.75rem;
+}
+p-inputnumber, .p-inputnumber {
+  width: 100%;
 }
 
 p-inputnumber.ng-dirty.ng-invalid > .p-inputnumber > .p-inputtext {

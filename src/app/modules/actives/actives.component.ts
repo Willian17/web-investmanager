@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { CategoryEnum } from 'src/app/shared/Enuns/CategoryEnum';
+import { labelCategoryActive } from 'src/app/shared/constants/labelCategoryActive';
 import { IActive } from 'src/app/shared/interfaces/IActive';
 import { ActiveService } from 'src/app/shared/services/active.service';
 
@@ -35,15 +36,7 @@ export class ActivesComponent implements OnInit {
   }
 
   getLabelEnum(enu: CategoryEnum) {
-    const schema = {
-      [CategoryEnum.ACOES_NACIONAIS]: 'Ações Nacionais',
-      [CategoryEnum.ACOES_INTERNACIONAIS]: 'Ações Internacionais',
-      [CategoryEnum.FUNDOS_IMOBILIARIOS]: 'Fundos Imobiliários',
-      [CategoryEnum.REITS]: 'REITs',
-      [CategoryEnum.RENDA_FIXA]: 'Renda Fixa',
-      [CategoryEnum.CRIPTOMOEDA]: 'Criptomoeda',
-    };
-    return schema[enu];
+    return labelCategoryActive[enu];
   }
 
   getSeverityTagCategory(category: CategoryEnum) {

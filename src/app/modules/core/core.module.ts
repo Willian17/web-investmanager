@@ -18,6 +18,10 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [MenuComponent],
@@ -53,6 +57,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     InputTextareaModule,
     ConfirmPopupModule,
     ConfirmDialogModule,
+    DropdownModule,
+    AutoCompleteModule,
+    InputSwitchModule,
+    InputNumberModule,
   ],
   providers: [
     {

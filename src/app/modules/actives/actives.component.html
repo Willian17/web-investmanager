@@ -41,7 +41,8 @@
           <td class="flex gap-3">
             <p-button
               styleClass="p-button-sm"
-              [routerLink]="['/actives/active', active.id]"
+              [routerLink]="['/actives/active']"
+              [queryParams]="{ id: active.id }"
             >
               <fa-icon [icon]="['fas', 'edit']" size="lg"></fa-icon>
             </p-button>

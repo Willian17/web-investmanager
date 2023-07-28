@@ -6,6 +6,7 @@ import { ActivesComponent } from './modules/actives/actives.component';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { QuestionsComponent } from './modules/questions/questions.component';
 import { QuestionCategoryComponent } from './modules/questions/question-category/question-category.component';
+import { ActiveComponent } from './modules/actives/active/active.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'actives',
     component: ActivesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'actives/active',
+    component: ActiveComponent,
     canActivate: [AuthGuard],
   },
   {
