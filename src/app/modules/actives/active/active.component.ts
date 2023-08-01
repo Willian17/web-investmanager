@@ -1,18 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageService, SelectItem } from 'primeng/api';
-import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  skip,
-  skipWhile,
-  switchMap,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { CategoryEnum } from 'src/app/shared/Enuns/CategoryEnum';
 import { labelCategoryActive } from 'src/app/shared/constants/labelCategoryActive';
+import { IActive } from 'src/app/shared/interfaces/IActive';
 import { IQuestion } from 'src/app/shared/interfaces/IQuestion';
 import { ActiveService } from 'src/app/shared/services/active.service';
 import { QuestionService } from 'src/app/shared/services/question.service';
@@ -23,24 +16,23 @@ import { QuestionService } from 'src/app/shared/services/question.service';
   styleUrls: ['./active.component.scss'],
 })
 export class ActiveComponent implements OnInit {
+  active: IActive = {} as IActive;
   activeForm: FormGroup = new FormGroup({});
-  idActive: string = '';
   optionsCategory: SelectItem[] = [];
   filteredNames: string[] = [];
   questions: IQuestion[] = [];
 
   categoryEnum: typeof CategoryEnum = CategoryEnum;
 
+  @Input('id') idActive: string = null as any;
+
   constructor(
-    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private activeService: ActiveService,
     private questionService: QuestionService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.idActive = params['id'];
-    });
     this.optionsCategory = Object.keys(labelCategoryActive).map((key) => {
       return {
         label: labelCategoryActive[key as CategoryEnum],
@@ -50,16 +42,34 @@ export class ActiveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activeForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      category: [this.optionsCategory[0], [Validators.required]],
-      amount: [0, [Validators.required]],
-      currentValue: [null],
-      note: [null],
-    });
+    this.getActiveById();
+    this.setFormActive();
     this.getQuestions(this.optionsCategory[0].value);
     this.registerFilterName();
     this.registerChangeCategory();
+  }
+
+  getActiveById() {
+    if (this.idActive) {
+      this.activeService.getById(this.idActive).then((res) => {
+        this.active = res;
+        this.setFormActive(res);
+      });
+    }
+  }
+
+  setFormActive(active?: IActive) {
+    this.activeForm = this.formBuilder.group({
+      name: [active?.name || '', [Validators.required]],
+      category: [
+        this.optionsCategory.find((item) => item.value === active?.category) ||
+          this.optionsCategory[0],
+        [Validators.required],
+      ],
+      amount: [active?.amount || 0, [Validators.required]],
+      currentValue: [active?.currentValue || null],
+      note: [active?.note || null],
+    });
   }
 
   registerFilterName() {
@@ -72,7 +82,6 @@ export class ActiveComponent implements OnInit {
         }),
         switchMap((text) => {
           const category = this.activeForm.get('category')?.value?.value;
-          console.log(category);
           return this.activeService.searchTicket(category, text);
         })
       )
@@ -103,10 +112,16 @@ export class ActiveComponent implements OnInit {
   }
   getQuestions(category: CategoryEnum) {
     this.questionService.getQuestionsByCategory(category).then((questions) => {
+      console.log(this.active);
       this.questions = questions.map((question) => {
+        const answer = this.active.answers.find(
+          (active) => active.idQuestion === question.id
+        );
         return {
           ...question,
-          response: false,
+          response: answer?.response || false,
+          idQuestion: question.id,
+          id: answer?.id,
         };
       });
     });
@@ -114,8 +129,9 @@ export class ActiveComponent implements OnInit {
   async handleSubmit() {
     const answers = this.questions.map((question) => {
       return {
-        idQuestion: question.id,
+        idQuestion: question.idQuestion,
         response: question.response,
+        id: question.id,
       };
     });
     const body = {
@@ -125,12 +141,24 @@ export class ActiveComponent implements OnInit {
       answers,
     };
 
-    this.activeService.create(body).then((res) => {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Sucesso',
-        detail: 'Ativo cadastrado com sucesso',
+    if (this.idActive) {
+      this.activeService.update(body, this.idActive).then(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: 'Ativo editado com sucesso',
+        });
       });
-    });
+      this.router.navigate(['/actives']);
+    } else {
+      this.activeService.create(body).then(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: 'Ativo cadastrado com sucesso',
+        });
+      });
+      this.router.navigate(['/actives']);
+    }
   }
 }

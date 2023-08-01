@@ -7,4 +7,5 @@ export interface IQuestion {
   quantity?: number;
   category: CategoryQuestionEnum;
   response?: boolean;
+  idQuestion?: string;
 }

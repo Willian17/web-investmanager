@@ -1,5 +1,6 @@
 import { CategoryEnum } from '../Enuns/CategoryEnum';
 import { CategoryQuestionEnum } from '../Enuns/CategoryQuestionEnum';
+import { IQuestion } from './IQuestion';
 
 export interface IActive {
   id?: string;
@@ -11,4 +12,5 @@ export interface IActive {
   price: number;
   recommend: number;
   percentage: number;
+  answers: IQuestion[];
 }

@@ -8,7 +8,7 @@ import { QuestionsComponent } from './modules/questions/questions.component';
 import { QuestionCategoryComponent } from './modules/questions/question-category/question-category.component';
 import { ActiveComponent } from './modules/actives/active/active.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
@@ -45,7 +45,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

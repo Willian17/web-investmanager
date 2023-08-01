@@ -20,6 +20,11 @@ export abstract class BaseService<T> {
       this.http.get(`${this.baseUrl}/${this.url}`)
     )) as T[];
   }
+  async getById(id: string): Promise<T> {
+    return (await lastValueFrom(
+      this.http.get(`${this.baseUrl}/${this.url}/${id}`)
+    )) as T;
+  }
 
   async create(body: T): Promise<T> {
     return (await lastValueFrom(

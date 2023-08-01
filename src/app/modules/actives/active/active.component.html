@@ -1,81 +1,117 @@
 <div>
   <h1 class="text-gray-500 text-2xl mb-3">
-    <span>Novo ativo</span>
+    <span>{{ idActive ? "Editar" : "Criar" }} ativo</span>
   </h1>
   <p-card>
     <form *ngIf="activeForm" [formGroup]="activeForm">
-      <div class="columns-2">
-        <div class="flex flex-col mb-3">
-          <label htmlFor="category" class="mb-1">Categoria</label>
-          <p-dropdown
-            formControlName="category"
-            [options]="optionsCategory"
-            optionLabel="label"
-          ></p-dropdown>
-        </div>
+      <ng-container [ngSwitch]="activeForm.get('category')?.value.value">
+        <ng-container *ngSwitchCase="categoryEnum.RENDA_FIXA">
+          <div class="columns-2">
+            <div class="flex flex-col mb-3">
+              <label htmlFor="category" class="mb-1">Categoria</label>
+              <p-dropdown
+                formControlName="category"
+                [options]="optionsCategory"
+                optionLabel="label"
+                [readonly]="!!idActive"
+              ></p-dropdown>
+            </div>
 
-        <div
-          class="flex flex-col mb-3"
-          *ngIf="
-            activeForm.get('category')?.value?.value != categoryEnum.RENDA_FIXA
-          "
-        >
-          <label htmlFor="name" class="mb-1">Nome</label>
-          <p-autoComplete
-            formControlName="name"
-            [suggestions]="filteredNames"
-          ></p-autoComplete>
-        </div>
-        <app-input-text
-          *ngIf="
-            activeForm.get('category')?.value?.value == categoryEnum.RENDA_FIXA
-          "
-          [form]="activeForm"
-          label="Nome"
-          type="text"
-          controlName="name"
-        />
-      </div>
-      <div
-        class="max-w-[50%]"
-        *ngIf="
-          activeForm.get('category')?.value?.value != categoryEnum.RENDA_FIXA
-        "
-      >
-        <app-input-text
-          [form]="activeForm"
-          label="Quantidade"
-          type="number"
-          controlName="amount"
-        />
-      </div>
+            <div class="flex flex-col mb-3">
+              <app-input-text
+                [form]="activeForm"
+                label="Nome"
+                type="text"
+                controlName="name"
+              />
+            </div>
+          </div>
+          <div class="columns-2">
+            <div class="flex flex-col mb-3">
+              <label htmlFor="currentValue" class="mb-1">Valor Atual</label>
 
-      <div
-        class="columns-2"
-        *ngIf="
-          activeForm.get('category')?.value?.value == categoryEnum.RENDA_FIXA
-        "
-      >
-        <div class="flex flex-col mb-3">
-          <label htmlFor="currentValue" class="mb-1">Valor Atual</label>
+              <p-inputNumber
+                formControlName="currentValue"
+                inputId="currentValue"
+                mode="currency"
+                currency="BRL"
+                locale="pt-BR"
+              >
+              </p-inputNumber>
+            </div>
+            <app-input-text
+              [form]="activeForm"
+              label="Nota"
+              type="number"
+              controlName="note"
+            />
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="categoryEnum.CRIPTOMOEDA">
+          <div class="columns-2">
+            <div class="flex flex-col mb-3">
+              <label htmlFor="category" class="mb-1">Categoria</label>
+              <p-dropdown
+                formControlName="category"
+                [options]="optionsCategory"
+                optionLabel="label"
+                [readonly]="!!idActive"
+              ></p-dropdown>
+            </div>
 
-          <p-inputNumber
-            formControlName="currentValue"
-            inputId="currentValue"
-            mode="currency"
-            currency="BRL"
-            locale="pt-BR"
-          >
-          </p-inputNumber>
-        </div>
+            <div class="flex flex-col mb-3">
+              <label htmlFor="name" class="mb-1">Nome</label>
+              <p-autoComplete
+                formControlName="name"
+                [suggestions]="filteredNames"
+              ></p-autoComplete>
+            </div>
+          </div>
+          <div class="columns-2">
+            <app-input-text
+              [form]="activeForm"
+              label="Quantidade"
+              type="number"
+              controlName="amount"
+            />
+            <app-input-text
+              [form]="activeForm"
+              label="Nota"
+              type="number"
+              controlName="note"
+            />
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <div class="columns-2">
+            <div class="flex flex-col mb-3">
+              <label htmlFor="category" class="mb-1">Categoria</label>
+              <p-dropdown
+                formControlName="category"
+                [options]="optionsCategory"
+                optionLabel="label"
+                [readonly]="!!idActive"
+              ></p-dropdown>
+            </div>
 
-        <app-input-text
-          [form]="activeForm"
-          label="Nota"
-          type="number"
-          controlName="note"
-        />
-      </div>
+            <div class="flex flex-col mb-3">
+              <label htmlFor="name" class="mb-1">Nome</label>
+              <p-autoComplete
+                formControlName="name"
+                [suggestions]="filteredNames"
+              ></p-autoComplete>
+            </div>
+          </div>
+          <div class="max-w-[50%]">
+            <app-input-text
+              [form]="activeForm"
+              label="Quantidade"
+              type="number"
+              controlName="amount"
+            />
+          </div>
+        </ng-container>
+      </ng-container>
     </form>
   </p-card>
 
