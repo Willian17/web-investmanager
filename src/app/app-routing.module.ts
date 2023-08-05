@@ -7,8 +7,9 @@ import { AuthGuard } from './modules/auth/auth.guard';
 import { QuestionsComponent } from './modules/questions/questions.component';
 import { QuestionCategoryComponent } from './modules/questions/question-category/question-category.component';
 import { ActiveComponent } from './modules/actives/active/active.component';
+import { MarksComponent } from './modules/marks/marks.component';
 
-export const routes: Routes = [
+const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
@@ -22,6 +23,11 @@ export const routes: Routes = [
   {
     path: 'actives/active',
     component: ActiveComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'marks',
+    component: MarksComponent,
     canActivate: [AuthGuard],
   },
   {
