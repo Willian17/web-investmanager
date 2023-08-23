@@ -54,6 +54,7 @@ export class ActiveComponent implements OnInit {
       this.activeService.getById(this.idActive).then((res) => {
         this.active = res;
         this.setFormActive(res);
+        this.getQuestions(res.category);
       });
     }
   }
@@ -112,9 +113,8 @@ export class ActiveComponent implements OnInit {
   }
   getQuestions(category: CategoryEnum) {
     this.questionService.getQuestionsByCategory(category).then((questions) => {
-      console.log(this.active);
       this.questions = questions.map((question) => {
-        const answer = this.active.answers.find(
+        const answer = this.active.answers?.find(
           (active) => active.idQuestion === question.id
         );
         return {

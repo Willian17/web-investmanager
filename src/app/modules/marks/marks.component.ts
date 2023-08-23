@@ -1,11 +1,4 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  NG_VALUE_ACCESSOR,
-  Validators,
-} from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CategoryEnum } from 'src/app/shared/Enuns/CategoryEnum';
 import { labelCategoryActive } from 'src/app/shared/constants/labelCategoryActive';
