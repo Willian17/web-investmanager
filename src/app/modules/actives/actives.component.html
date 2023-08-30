@@ -12,7 +12,7 @@
     <p-table [value]="actives">
       <ng-template pTemplate="header">
         <tr>
-          <th>Id</th>
+          <th></th>
           <th>Tipo</th>
           <th>Nome</th>
           <th>Alocado</th>
@@ -23,7 +23,18 @@
       </ng-template>
       <ng-template pTemplate="body" let-active let-i="rowIndex">
         <tr>
-          <td>{{ i + 1 }}</td>
+          <td>
+            <img
+              *ngIf="!!active.logoUrl"
+              [src]="active.logoUrl"
+              class="w-10 h-10 max-w-min rounded-lg"
+            />
+            <span
+              *ngIf="!active.logoUrl"
+              class="py-3 px-4 rounded-lg bg-gray-400 text-white"
+              >{{ active?.name[0]?.toUpperCase() }}
+            </span>
+          </td>
           <td>
             <p-tag
               [value]="getLabelEnum(active.category)"
