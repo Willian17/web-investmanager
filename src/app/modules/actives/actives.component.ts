@@ -39,6 +39,17 @@ export class ActivesComponent implements OnInit {
     return labelCategoryActive[enu];
   }
 
+  getClassBgLogo(category: CategoryEnum) {
+    switch (category) {
+      case CategoryEnum.RENDA_FIXA:
+        return 'bg-orange-400';
+      case CategoryEnum.CRIPTOMOEDA:
+        return 'bg-red-400';
+      default:
+        return 'bg-primary';
+    }
+  }
+
   getSeverityTagCategory(category: CategoryEnum) {
     switch (category) {
       case CategoryEnum.ACOES_NACIONAIS:
