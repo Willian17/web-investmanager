@@ -8,6 +8,7 @@ import { QuestionsComponent } from './modules/questions/questions.component';
 import { QuestionCategoryComponent } from './modules/questions/question-category/question-category.component';
 import { ActiveComponent } from './modules/actives/active/active.component';
 import { MarksComponent } from './modules/marks/marks.component';
+import { ContributeComponent } from './modules/contribute/contribute.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'actives',
     component: ActivesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'new-contribution',
+    component: ContributeComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -54,7 +54,12 @@ export class ActiveComponent implements OnInit {
       this.activeService.getById(this.idActive).then((res) => {
         this.active = res;
         this.setFormActive(res);
-        this.getQuestions(res.category);
+        if (
+          res.category !== CategoryEnum.CRIPTOMOEDA &&
+          res.category !== CategoryEnum.RENDA_FIXA
+        ) {
+          this.getQuestions(res.category);
+        }
       });
     }
   }

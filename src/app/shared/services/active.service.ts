@@ -3,6 +3,8 @@ import { BaseService } from './base-service.service';
 import { IActive } from '../interfaces/IActive';
 import { lastValueFrom } from 'rxjs';
 import { ITickerResponseDto } from '../interfaces/dtos/ITickerResponseDto';
+import { ICalculateProvideRequestDto } from '../interfaces/dtos/ICalculateProvideRequestDto';
+import { ICalculateProvideResponseDto } from '../interfaces/dtos/ICalculateProvideResponseDto';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +23,13 @@ export class ActiveService extends BaseService<IActive> {
         params: { ticker, category },
       })
     )) as ITickerResponseDto;
+  }
+
+  async calculateProvideActives(
+    body: ICalculateProvideRequestDto
+  ): Promise<ICalculateProvideResponseDto[]> {
+    return (await lastValueFrom(
+      this.http.post(`${this.baseUrl}/actives/calculate-provide`, body)
+    )) as ICalculateProvideResponseDto[];
   }
 }

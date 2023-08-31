@@ -17,6 +17,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { ActivesModule } from './modules/actives/actives.module';
 import { MarksModule } from './modules/marks/marks.module';
+import { ContributeComponent } from './modules/contribute/contribute.component';
+import { ContributeModule } from './modules/contribute/contribute.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +33,7 @@ import { MarksModule } from './modules/marks/marks.module';
     AuthModule,
     ActivesModule,
     MarksModule,
+    ContributeModule,
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent],

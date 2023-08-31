@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit {
     {
       label: 'Novo aporte',
       icon: faMoneyBillTrendUp,
-      url: '/actives/new-contribution',
+      url: '/new-contribution',
     },
   ];
 

@@ -1,0 +1,91 @@
+<div>
+  <h1 class="text-gray-500 text-2xl mb-3">Calcular aporte</h1>
+
+  <form
+    [formGroup]="activeForm"
+    (submit)="onSubmitCalculate()"
+    class="mt-5 mb-3"
+  >
+    <div class="columns-2">
+      <div class="flex flex-col mb-3">
+        <label htmlFor="currentValue" class="mb-1 text-gray-500"
+          >Valor do aporte</label
+        >
+
+        <p-inputNumber
+          formControlName="amountValue"
+          inputId="currentValue"
+          mode="currency"
+          currency="BRL"
+          locale="pt-BR"
+        >
+        </p-inputNumber>
+      </div>
+
+      <p-button
+        type="submit"
+        label="Calcular"
+        class="mt-7 min-w-fit"
+        [disabled]="activeForm.invalid"
+      ></p-button>
+    </div>
+  </form>
+
+  <p-card>
+    <p-table [value]="activesAmount">
+      <ng-template pTemplate="header">
+        <tr>
+          <th></th>
+
+          <th>Tipo</th>
+          <th>Nome</th>
+          <th>Preço</th>
+          <th>Aporte</th>
+          <th>Quantidade</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-active let-i="rowIndex">
+        <tr>
+          <td>
+            <img
+              *ngIf="!!active.logoUrl"
+              [src]="active.logoUrl"
+              class="w-10 h-10 max-w-min rounded-lg"
+            />
+            <span
+              *ngIf="!active.logoUrl"
+              [class]="
+                'py-3 px-4 rounded-lg text-white ' +
+                this.getClassBgLogo(active.category)
+              "
+              >{{ active?.name[0]?.toUpperCase() }}
+            </span>
+          </td>
+          <td>
+            <p-tag
+              [value]="getLabelEnum(active.category)"
+              [severity]="getSeverityTagCategory(active.category)"
+            ></p-tag>
+          </td>
+          <td>
+            {{ active.name }}
+          </td>
+          <td>
+            {{ active.price | currency : "BRL" }}
+          </td>
+          <td>
+            {{ active.contributionAmount | currency : "BRL" }}
+          </td>
+          <td>
+            <span *ngIf="active.category != categoryEnum.CRIPTOMOEDA">{{
+              active.quantity | number : "1.0-2"
+            }}</span>
+            <span *ngIf="active.category == categoryEnum.CRIPTOMOEDA">{{
+              active.quantity
+            }}</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

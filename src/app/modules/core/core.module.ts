@@ -23,6 +23,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SliderModule } from 'primeng/slider';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
 
 @NgModule({
   declarations: [MenuComponent],
@@ -40,6 +42,8 @@ import { SliderModule } from 'primeng/slider';
     InputTextareaModule,
     ConfirmPopupModule,
     ConfirmDialogModule,
+    AvatarModule,
+    AvatarGroupModule,
   ],
   exports: [
     ButtonModule,
@@ -62,6 +66,8 @@ import { SliderModule } from 'primeng/slider';
     AutoCompleteModule,
     InputSwitchModule,
     InputNumberModule,
+    AvatarModule,
+    AvatarGroupModule,
   ],
   providers: [
     {
