@@ -102,7 +102,7 @@
 ## :computer: Tecnologias <a name="tecnologias"></a>
 <ul>
 <li>NodeJS</li>
-<li>Angular</li>
+<li>Angular 16</li>
 <li>TypeScript</li>
 <li>Tailwindcss</li>
 <li>Primeng</li>
