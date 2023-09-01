@@ -79,7 +79,9 @@
   ## :construction_worker: Como executar <a name="executar"></a>
 
   ### Pré-requisitos
-  Ter o <a href="https://nodejs.org/en/">Node.js</a> instalado na maquina.
+  1. Ter o <a href="https://nodejs.org/en/">Node.js</a> instalado na maquina.
+
+  2. Ter a [API do InvestManager](https://github.com/Willian17/api-investmanager) rodando na maquina
   
   ### Clonar Repositório
   $ git clone https://github.com/Willian17/web-investmanager.git
@@ -101,11 +103,11 @@
 <ul>
 <li>NodeJS</li>
 <li>Angular</li>
-<li>Typescript</li>
+<li>TypeScript</li>
 <li>Tailwindcss</li>
-<li>primeng</li>
+<li>Primeng</li>
 <li>FontAwesome</li>
-<li>JWT Decode</li>
+<li>JWT</li>
 </ul>
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png)
