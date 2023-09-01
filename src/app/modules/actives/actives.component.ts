@@ -18,20 +18,19 @@ export class ActivesComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  ngOnInit(): void {
-    this.getActives();
+  async ngOnInit(): Promise<void> {
+    await this.getActives();
   }
 
-  getActives() {
-    this.activeService.get().then((actives) => {
-      this.actives = actives.map((active) => {
-        return {
-          ...active,
-          percentage: active.percentage.toFixed(2) as any,
-          categoryLabel: this.getLabelEnum(active.category),
-          severityTagCategory: this.getSeverityTagCategory(active.category),
-        };
-      });
+  async getActives() {
+    const actives = await this.activeService.get();
+    this.actives = actives.map((active) => {
+      return {
+        ...active,
+        percentage: active.percentage.toFixed(2) as any,
+        categoryLabel: this.getLabelEnum(active.category),
+        severityTagCategory: this.getSeverityTagCategory(active.category),
+      };
     });
   }
 
