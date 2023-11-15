@@ -1,7 +1,10 @@
 <div>
   <h1 class="text-gray-500 text-2xl mb-3">Metas</h1>
   <p-card>
-    <ul *ngIf="marks.length">
+    <span
+      >Total: <span class="font-bold">{{ calculateTotal() }}%</span></span
+    >
+    <ul *ngIf="marks.length" class="mt-3">
       <li *ngFor="let mark of marks" class="mb-3">
         {{ mark.label }}
         <p-inputNumber

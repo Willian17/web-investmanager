@@ -41,8 +41,8 @@ export class MarksComponent implements OnInit {
         id: mark.id,
         percentage: mark.percentage,
         category: mark.category,
-      }
-    })
+      };
+    });
     await this.markService.updateMark(body);
     this.messageService.add({
       severity: 'success',
@@ -50,5 +50,13 @@ export class MarksComponent implements OnInit {
       detail: `Metas atualizada com sucesso`,
     });
     await this.getMarks();
+  }
+
+  calculateTotal() {
+    console.log(this.marks);
+    const total = this.marks.reduce((acc, mark) => {
+      return acc + mark.percentage;
+    }, 0);
+    return total;
   }
 }
