@@ -121,6 +121,17 @@
       activeForm.get('category')?.value?.value != categoryEnum.CRIPTOMOEDA
     "
   >
+    <div class="grid my-3" *ngIf="questions">
+      <div class="max-w-sm">
+        <p-card class="h-full">
+          <fa-icon [icon]="['fas', 'star']" size="lg" class="mr-2"></fa-icon>
+          <span class="font-semibold text-lg"> Nota </span> <br />
+          <span class="text-4xl font-bold text-primary">{{
+            calculateNote()
+          }}</span>
+        </p-card>
+      </div>
+    </div>
     <h1 class="text-gray-500 text-2xl mb-3 mt-5">
       <span>Perguntas</span>
     </h1>

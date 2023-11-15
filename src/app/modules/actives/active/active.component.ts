@@ -131,6 +131,9 @@ export class ActiveComponent implements OnInit {
       });
     });
   }
+  calculateNote() {
+    return this.questions.filter((question) => question.response)?.length;
+  }
   async handleSubmit() {
     const answers = this.questions.map((question) => {
       return {
