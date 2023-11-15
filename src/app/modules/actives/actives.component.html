@@ -15,6 +15,7 @@
           <th></th>
           <th>Tipo</th>
           <th>Nome</th>
+          <th>Qtd</th>
           <th>Alocado</th>
           <th>Recomendado</th>
           <th>Atual</th>
@@ -46,6 +47,9 @@
           </td>
           <td>
             {{ active.name }}
+          </td>
+          <td>
+            {{ active.amount }}
           </td>
           <td>
             {{ active.currentValue | currency : "BRL" }}
