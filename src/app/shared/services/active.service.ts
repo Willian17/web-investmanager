@@ -27,9 +27,9 @@ export class ActiveService extends BaseService<IActive> {
 
   async calculateProvideActives(
     body: ICalculateProvideRequestDto
-  ): Promise<ICalculateProvideResponseDto[]> {
+  ): Promise<ICalculateProvideResponseDto> {
     return (await lastValueFrom(
-      this.http.post(`${this.baseUrl}/actives/calculate-provide`, body)
-    )) as ICalculateProvideResponseDto[];
+      this.http.post(`${this.baseUrl}/contribute/calculate`, body)
+    )) as ICalculateProvideResponseDto;
   }
 }

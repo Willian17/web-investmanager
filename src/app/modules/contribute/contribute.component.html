@@ -31,8 +31,10 @@
     </div>
   </form>
 
+  <app-data-amount [amount]="amount"> </app-data-amount>
+
   <p-card>
-    <p-table [value]="activesAmount">
+    <p-table [value]="amount.actives">
       <ng-template pTemplate="header">
         <tr>
           <th></th>

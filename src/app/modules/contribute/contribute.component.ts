@@ -12,7 +12,7 @@ import { ActiveService } from 'src/app/shared/services/active.service';
 })
 export class ContributeComponent implements OnInit {
   activeForm: FormGroup = new FormGroup({});
-  activesAmount: ICalculateProvideResponseDto[] = [];
+  amount: ICalculateProvideResponseDto = {} as ICalculateProvideResponseDto;
   categoryEnum: typeof CategoryEnum = CategoryEnum;
 
   constructor(
@@ -41,18 +41,21 @@ export class ContributeComponent implements OnInit {
         value: amountValue,
       })
       .then((response) => {
-        this.activesAmount = response.map((active) => {
-          if (
-            active.category === CategoryEnum.CRIPTOMOEDA &&
-            active.quantity &&
-            active.quantity < 1
-          ) {
-            active.quantity = active.quantity.toPrecision(2) as any;
-          }
-          return {
-            ...active,
-          };
-        });
+        this.amount = {
+          ...response,
+          actives: response.actives.map((active) => {
+            if (
+              active.category === CategoryEnum.CRIPTOMOEDA &&
+              active.quantity &&
+              active.quantity < 1
+            ) {
+              active.quantity = active.quantity.toPrecision(2) as any;
+            }
+            return {
+              ...active,
+            };
+          }),
+        };
       });
   }
 
