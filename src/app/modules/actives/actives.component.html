@@ -1,5 +1,21 @@
 <div>
   <h1 class="text-gray-500 text-2xl mb-3">Meus ativos</h1>
+
+  <div class="grid mb-3" *ngIf="activesInfo.totalEquity">
+    <div class="max-w-sm">
+      <p-card class="h-full">
+        <fa-icon
+          [icon]="['fas', 'money-bill']"
+          size="lg"
+          class="mr-2"
+        ></fa-icon>
+        <span class="font-semibold text-lg"> Patrimonio </span> <br />
+        <span class="text-4xl font-bold text-primary">{{
+          activesInfo.totalEquity | currency : "BRL"
+        }}</span>
+      </p-card>
+    </div>
+  </div>
   <p-card>
     <div class="flex justify-end">
       <div class="max-w-min">
@@ -9,7 +25,7 @@
         </p-button>
       </div>
     </div>
-    <p-table [value]="actives">
+    <p-table [value]="activesInfo.actives">
       <ng-template pTemplate="header">
         <tr>
           <th></th>

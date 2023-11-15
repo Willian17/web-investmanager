@@ -3,6 +3,7 @@ import { MessageService } from 'primeng/api';
 import { CategoryEnum } from 'src/app/shared/Enuns/CategoryEnum';
 import { labelCategoryActive } from 'src/app/shared/constants/labelCategoryActive';
 import { IActive } from 'src/app/shared/interfaces/IActive';
+import { IActivesResponseDto } from 'src/app/shared/interfaces/dtos/IActivesResponseDto';
 import { ActiveService } from 'src/app/shared/services/active.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { ActiveService } from 'src/app/shared/services/active.service';
   styleUrls: ['./actives.component.scss'],
 })
 export class ActivesComponent implements OnInit {
-  actives: IActive[] = [];
+  activesInfo: IActivesResponseDto = {} as IActivesResponseDto;
 
   constructor(
     private activeService: ActiveService,
@@ -23,8 +24,8 @@ export class ActivesComponent implements OnInit {
   }
 
   async getActives() {
-    const actives = await this.activeService.get();
-    this.actives = actives.map((active) => {
+    const response = await this.activeService.findAll();
+    const actives = response.actives.map((active) => {
       return {
         ...active,
         percentage: active.percentage.toFixed(2) as any,
@@ -32,6 +33,10 @@ export class ActivesComponent implements OnInit {
         severityTagCategory: this.getSeverityTagCategory(active.category),
       };
     });
+    this.activesInfo = {
+      ...response,
+      actives,
+    };
   }
 
   getLabelEnum(enu: CategoryEnum) {
