@@ -71,7 +71,15 @@
             {{ active.currentValue | currency : "BRL" }}
           </td>
           <td>{{ active.recommend | number : "1.2-2" }}%</td>
-          <td>{{ active.percentage | number : "1.2-2" }}%</td>
+          <td
+            [ngClass]="[
+              active.percentage <= active.recommend
+                ? 'text-primary'
+                : 'text-red-500'
+            ]"
+          >
+            {{ active.percentage | number : "1.2-2" }}%
+          </td>
           <td class="flex gap-3">
             <p-button
               styleClass="p-button-sm"
